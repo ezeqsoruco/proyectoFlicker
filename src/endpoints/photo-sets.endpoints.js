@@ -1,4 +1,5 @@
 import { buildEndpoint } from "./config";
+import axios from 'axios';
 
 const GET_PHOTO_SET_ENDPOINT = 'flickr.photosets.getList'
 const USER_ID_PARAMETER = '&user_id=';
@@ -12,7 +13,7 @@ const EXTRAS_PARAMETER = '&extras='
 const PRIVACY_FILTER_PARAMETER = '&privacy_filter='
 const MEDIA_PARAMETER = '&media='
 
-export const getPhotoSets = async(userId, page, perPage, primaryPhotoExtras, photosIds, sortGroups) => {
+export const getPhotoSets = async (userId, page, perPage, primaryPhotoExtras, photosIds, sortGroups) => {
     let parameters = ''
     if (userId) parameters += USER_ID_PARAMETER + userId;
     if (page) parameters += PAGE_PARAMETER + page
@@ -29,7 +30,7 @@ export const getPhotoSets = async(userId, page, perPage, primaryPhotoExtras, pho
         .catch(error => console.log(error));
 }
 
-export const getPhotos = async(photosetId, userId, extras, perPage, page, privacyFilter, media) => {
+export const getPhotos = async (photosetId, userId, extras, perPage, page, privacyFilter, media) => {
     let parameters = '';
     if (photosetId) parameters += PHOTOSET_ID_PARAMETER + photosetId
     if (userId) parameters += USER_ID_PARAMETER + userId
