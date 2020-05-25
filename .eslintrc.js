@@ -22,5 +22,5 @@ module.exports = {
         'react',
         'react-native'
     ],
-    rules: {}
+    rules: { indent: [2, 'tab'] }
 }
