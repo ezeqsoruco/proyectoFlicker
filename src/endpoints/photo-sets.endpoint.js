@@ -26,7 +26,11 @@ export const getPhotoSets = async (userId, page, perPage, primaryPhotoExtras, ph
     console.log('Endpoint: > ', endpoint);
 
     return axios.get(endpoint)
-        .then(response => response.data.photosets)
+        .then(response => {
+            console.log('response.data')
+            console.log(response.data)
+            return response.data.photosets
+        })
         .catch(error => console.log(error));
 }
 
@@ -41,9 +45,10 @@ export const getPhotos = async (photosetId, userId, extras, perPage, page, priva
     if (media) parameters += MEDIA_PARAMETER + media
 
     const endpoint = buildEndpoint(GET_PHOTO_SET_ENDPOINT, parameters);
-    console.log('Endpoint: > ', endpoint);
 
     return axios.get(endpoint)
         .then(response => response.data.photoset.photo)
         .catch(error => console.log(error));
 }
+
+export default { getPhotoSets, getPhotos }

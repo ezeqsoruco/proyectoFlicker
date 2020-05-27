@@ -1,47 +1,49 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
 import AlbumDetail from './AlbumDetail';
-import { getPhotoSets } from '../endpoints/photo-sets.endpoints';
+import { UserEndpoint, PhotoSetsEndpoint } from '../endpoints';
 
-class AlbumList extends Component {
-    state = { photoset: null };
+const DEFAULT_USERNAME = 'maxipomar';
 
-    componentWillMount() {
-        const userId = '137290658%40N08';
-        const photosetFromFlickr = getPhotoSets(userId);
-        this.setState({ photoset: photosetFromFlickr });
+const AlbumList = () => {
+    const [photoset, setPhotoset] = useState(null);
 
-    }
-
-    renderAlbums() {
-        return this.state.photoset.map(album =>
-            <AlbumDetail key={album.id}
-                title={album.title._content}
-                albumId={album.id} />
-        );
-    }
-
-    render() {
-        console.log(this.state);
-
-
-        if (!this.state.photoset) {
-            return (
-                <Text>
-                    Loading...
-                </Text>
-            );
+    useEffect(() => {
+        async function loadPhotoSet() {
+            const user = await UserEndpoint.getUserByUserName(DEFAULT_USERNAME);
+            const photosetFromFlickr = await PhotoSetsEndpoint.getPhotoSets(user.id);
+            setPhotoset(photosetFromFlickr.photoset);
         }
+        loadPhotoSet();
+    }, [])
 
+    if (!photoset) {
         return (
-            <View style={{ flex: 1 }}>
-                <ScrollView>
-                    {this.renderAlbums()}
-                </ScrollView>
-            </View>
+            <Text>
+                Loading...
+            </Text>
         );
+    }
+
+    return (
+        <View style={{ flex: 1 }}>
+            <ScrollView>
+                {renderAlbums(photoset)}
+            </ScrollView>
+        </View>
+    );
+}
+
+function renderAlbums(photoset) {
+    if (photoset) {
+        return (
+            photoset.map(
+                (album) => <AlbumDetail key={album.id} title={album.title._content} albumId={album.id} />
+            )
+        )
     }
 }
+
 
 export default AlbumList;

@@ -12,7 +12,7 @@ const AlbumDetail = ({ title, albumId }) => {
     headerTextStyle,
     imageStyle
   } = styles;
-
+  console.log('being created')
   return (
     <Card>
       <CardSection>

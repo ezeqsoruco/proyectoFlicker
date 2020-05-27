@@ -1,6 +1,7 @@
-const API_KEY = '697b65771a60c7f95e3e7561967e0408'
-const API_KEY_PARAMETER = '$api_key='
-const BASE_ENDPOINT = 'https://api.flickr.com/services/rest/?method='
+const API_KEY = '0b591382ba6495fe2e5d7df91b69f7d2'
+// const API_KEY = '6e8a597cb502b7b95dbd46a46e25db8d'
+const API_KEY_PARAMETER = '&api_key='
+const BASE_ENDPOINT = 'https://www.flickr.com/services/rest/?method='
 const INTO_JSON_PARAMETER = '&format=json&nojsoncallback=1'
 
 export function buildEndpoint(endpointName, parameters) {
