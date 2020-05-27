@@ -18,6 +18,16 @@ const AlbumList = () => {
         loadPhotoSet();
     }, [])
 
+
+    const renderAlbums = () => {
+        if (photoset) {
+            return photoset.map(album =>
+                <AlbumDetail key={album.id} title={album.title._content} albumId={album.id} />
+            );
+        }
+    };
+
+
     if (!photoset) {
         return (
             <Text>
@@ -29,21 +39,21 @@ const AlbumList = () => {
     return (
         <View style={{ flex: 1 }}>
             <ScrollView>
-                {renderAlbums(photoset)}
+                {renderAlbums()}
             </ScrollView>
         </View>
     );
 }
 
-function renderAlbums(photoset) {
-    if (photoset) {
-        return (
-            photoset.map(
-                (album) => <AlbumDetail key={album.id} title={album.title._content} albumId={album.id} />
-            )
-        )
-    }
-}
+// function renderAlbums(photoset) {
+//     if (photoset) {
+//         return (
+//             photoset.map(
+//                 (album) => <AlbumDetail key={album.id} title={album.title._content} albumId={album.id} />
+//             )
+//         )
+//     }
+// }
 
 
 export default AlbumList;
