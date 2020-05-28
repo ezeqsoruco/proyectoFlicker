@@ -1,7 +1,9 @@
 import { buildEndpoint } from "./config";
 import axios from 'axios';
 
-const GET_PHOTO_SET_ENDPOINT = 'flickr.photosets.getList'
+const GET_PHOTO_SET_ENDPOINT = 'flickr.photosets.getList';
+const GET_PHOTOS_ENDPOINT = 'flickr.photosets.getPhotos';
+
 const USER_ID_PARAMETER = '&user_id=';
 const PAGE_PARAMETER = '&page=';
 const PER_PAGE_PARAMETER = '&per_page=';
@@ -27,8 +29,6 @@ export const getPhotoSets = async (userId, page, perPage, primaryPhotoExtras, ph
 
     return axios.get(endpoint)
         .then(response => {
-            console.log('response.data')
-            console.log(response.data)
             return response.data.photosets
         })
         .catch(error => console.log(error));
@@ -44,7 +44,8 @@ export const getPhotos = async (photosetId, userId, extras, perPage, page, priva
     if (privacyFilter) parameters += PRIVACY_FILTER_PARAMETER + privacyFilter
     if (media) parameters += MEDIA_PARAMETER + media
 
-    const endpoint = buildEndpoint(GET_PHOTO_SET_ENDPOINT, parameters);
+    const endpoint = buildEndpoint(GET_PHOTOS_ENDPOINT, parameters);
+    console.log('Endpoint:>>>> > ', endpoint);
 
     return axios.get(endpoint)
         .then(response => response.data.photoset.photo)

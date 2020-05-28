@@ -45,15 +45,5 @@ const AlbumList = () => {
     );
 }
 
-// function renderAlbums(photoset) {
-//     if (photoset) {
-//         return (
-//             photoset.map(
-//                 (album) => <AlbumDetail key={album.id} title={album.title._content} albumId={album.id} />
-//             )
-//         )
-//     }
-// }
-
 
 export default AlbumList;
