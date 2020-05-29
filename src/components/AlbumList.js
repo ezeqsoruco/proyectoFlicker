@@ -4,6 +4,7 @@ import { ScrollView, Text, View } from 'react-native';
 import AlbumDetail from './AlbumDetail';
 import { UserEndpoint, PhotoSetsEndpoint } from '../endpoints';
 import Title from './Title';
+import Loading from './Loading';
 
 const DEFAULT_USERNAME = 'maxipomar';
 const ALBUM_LIST_TITLE = 'Hola de nuevo'
@@ -32,9 +33,7 @@ const AlbumList = () => {
 
     if (!photoset) {
         return (
-            <Text>
-                Loading...
-            </Text>
+           <Loading></Loading>
         );
     }
 
