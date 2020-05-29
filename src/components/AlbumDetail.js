@@ -8,24 +8,14 @@ import { Actions } from 'react-native-router-flux';
 const AlbumDetail = ({ title, albumId }) => {
   const {
     headerContentStyle,
-    
     headerTextStyle,
     imageStyle
   } = styles;
   return (
-    <Card>
-      <CardSection>
+    <Card onPress={() => Actions.photoList({albumId:albumId})}>
         <View style={headerContentStyle}>
           <Text style={headerTextStyle}>{title}</Text>
-          
         </View>
-      </CardSection>
-
-      <CardSection>
-        <Button onPress={() => Actions.photoList({albumId:albumId})}>
-          See Now!
-        </Button>
-      </CardSection>
     </Card>
   );
 };
@@ -33,10 +23,11 @@ const AlbumDetail = ({ title, albumId }) => {
 const styles = {
   headerContentStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between',
+    padding: 20, 
   },
   headerTextStyle: {
-    fontSize: 18
+    fontSize: 25,
   },
   thumbnailStyle: {
     height: 50,

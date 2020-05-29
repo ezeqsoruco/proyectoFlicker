@@ -3,8 +3,10 @@ import { ScrollView, Text, View } from 'react-native';
 
 import AlbumDetail from './AlbumDetail';
 import { UserEndpoint, PhotoSetsEndpoint } from '../endpoints';
+import Title from './Title';
 
 const DEFAULT_USERNAME = 'maxipomar';
+const ALBUM_LIST_TITLE = 'Hola de nuevo'
 
 const AlbumList = () => {
     const [photoset, setPhotoset] = useState(null);
@@ -38,6 +40,7 @@ const AlbumList = () => {
 
     return (
         <View style={{ flex: 1 }}>
+            <Title>{`${ALBUM_LIST_TITLE} ${DEFAULT_USERNAME} !`}</Title>
             <ScrollView>
                 {renderAlbums()}
             </ScrollView>
