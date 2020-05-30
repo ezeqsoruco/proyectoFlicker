@@ -1,8 +1,10 @@
 import React from 'react';
 import { Text, Image, Linking } from 'react-native';
 import Card from './Card';
+import Button from './Button';
+import { Actions } from 'react-native-router-flux';
 
-const PhotoDetail = ({ title, imageUrl }) => {
+const PhotoDetail = ({ title, imageUrl, photoId }) => {
   const { imageStyle, containerStyle, titleStyle } = styles;
 
   return (
@@ -12,6 +14,7 @@ const PhotoDetail = ({ title, imageUrl }) => {
         source={{ uri: imageUrl }}
       />
       <Text style={titleStyle}>{title}</Text>
+      <Button onPress={() => Actions.commentList({ title, imageUrl, photoId })} >Comentarios</Button>
     </Card>
   );
 };

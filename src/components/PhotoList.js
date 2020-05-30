@@ -12,8 +12,8 @@ const PhotoList = (props) => {
   useEffect(() => {
     async function loadPhotoSets() {
       const user = await UserEndpoint.getUserByUserName(DEFAULT_USERNAME);
-      const photo = await PhotoSetsEndpoint.getPhotos(props.albumId, user.id);
-      setPhotos(photo);
+      const photosFromFlickr = await PhotoSetsEndpoint.getPhotos(props.albumId, user.id);
+      setPhotos(photosFromFlickr);
     }
     loadPhotoSets();
   }, [])
@@ -21,10 +21,10 @@ const PhotoList = (props) => {
 
   const renderAlbums = () => {
     if (photos) {
-      console.log('rendering photos')
-      return photos.map(photo =>
-        <PhotoDetail key={photo.title} title={photo.title} imageUrl={`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`} />
-      );
+      return photos.map((photo, index) => {
+        const imageUrl = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`;
+        return <PhotoDetail key={index} title={photo.title} imageUrl={imageUrl} photoId={photo.id} />
+      });
     }
   }
 
@@ -34,7 +34,6 @@ const PhotoList = (props) => {
       <Loading></Loading>
     );
   }
-  console.log('laskdjasldkjsadlkjsada')
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
