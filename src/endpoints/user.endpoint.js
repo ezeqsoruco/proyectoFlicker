@@ -1,15 +1,13 @@
-import { buildEndpoint } from "./config";
-import axios from 'axios';
+import { getData } from "./config";
 
 const GET_USER_BY_USERNAME = 'flickr.people.findByUsername'
 const USERNAME_PARAMETER = '&username='
 
 export const getUserByUserName = async (username) => {
     const parameter = USERNAME_PARAMETER + username;
-    const endpoint = buildEndpoint(GET_USER_BY_USERNAME, parameter);
-    console.log('ENdoint >', endpoint)
-    return axios.get(endpoint)
-        .then(response => response.data.user)
+    
+    return getData(GET_USER_BY_USERNAME, parameter)
+        .then(data => data.user)
         .catch(error => console.log(error));
 }
 
