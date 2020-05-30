@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { CommentsEndpoint } from '../endpoints';
 import Thumbnail from './Thumbnail';
 import Loading from './Loading';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import CommentDetail from './CommentDetail';
 
-const CommentList = ({ title, imageUrl, photoId }) => {
+const CommentList = ({ route }) => {
     const [comments, setComments] = useState(null);
 
     useEffect(() => {
         async function loadComments() {
-            const comments = await CommentsEndpoint.getComments(photoId);
+            const comments = await CommentsEndpoint.getComments(route.params.photoId);
             console.log('comments');
             console.log(comments);
             setComments(comments);
@@ -18,14 +18,9 @@ const CommentList = ({ title, imageUrl, photoId }) => {
         loadComments();
     }, [])
 
-    const renderComments = () => {
-        if (comments) {
-            return comments.map((comment, index) =>
-                <CommentDetail key={index} comment={comment}></CommentDetail>
-            );
-        }
+    const renderComments = (comment) => {
+        <CommentDetail comment={comment}></CommentDetail>
     }
-
 
     if (!comments) {
         return (
@@ -34,10 +29,13 @@ const CommentList = ({ title, imageUrl, photoId }) => {
     }
     return (
         <View style={{ flex: 1 }}>
-            <Thumbnail title={title} imageUrl={imageUrl} />
-            <ScrollView>
-                {renderComments()}
-            </ScrollView>
+            <Thumbnail title={route.params.title} imageUrl={route.params.imageUrl} />
+            <FlatList
+                data={comments}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item }) => (renderComments(item))}
+                keyExtractor={item => item.comment}
+            />
         </View>
     );
 }

@@ -4,7 +4,7 @@ import Card from './Card';
 import Button from './Button';
 import { Actions } from 'react-native-router-flux';
 
-const PhotoDetail = ({ title, imageUrl, photoId }) => {
+const PhotoDetail = ({ navigation, title, imageUrl, photoId }) => {
   const { imageStyle, containerStyle, titleStyle } = styles;
 
   return (
@@ -14,7 +14,7 @@ const PhotoDetail = ({ title, imageUrl, photoId }) => {
         source={{ uri: imageUrl }}
       />
       <Text style={titleStyle}>{title}</Text>
-      <Button onPress={() => Actions.commentList({ title, imageUrl, photoId })} >Comentarios</Button>
+      <Button onPress={() => navigation.navigate('Comments', { title, imageUrl, photoId })} ></Button>
     </Card>
   );
 };
