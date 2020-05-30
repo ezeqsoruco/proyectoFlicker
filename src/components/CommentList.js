@@ -3,6 +3,7 @@ import { CommentsEndpoint } from '../endpoints';
 import Thumbnail from './Thumbnail';
 import Loading from './Loading';
 import { Text, View, ScrollView } from 'react-native';
+import CommentDetail from './CommentDetail';
 
 const CommentList = ({ title, imageUrl, photoId }) => {
     const [comments, setComments] = useState(null);
@@ -20,7 +21,7 @@ const CommentList = ({ title, imageUrl, photoId }) => {
     const renderComments = () => {
         if (comments) {
             return comments.map((comment, index) =>
-                <Text key={index}>{comment}</Text>
+                <CommentDetail key={index} comment={comment}></CommentDetail>
             );
         }
     }
@@ -33,9 +34,9 @@ const CommentList = ({ title, imageUrl, photoId }) => {
     }
     return (
         <View style={{ flex: 1 }}>
-            <Thumbnail  title={title} imageUrl={imageUrl} />
+            <Thumbnail title={title} imageUrl={imageUrl} />
             <ScrollView>
-                {/* {renderComments()} */}
+                {renderComments()}
             </ScrollView>
         </View>
     );
