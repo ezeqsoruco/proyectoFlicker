@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View } from 'react-native';
-
+import { ScrollView, Text, View, FlatList } from 'react-native';
 import AlbumDetail from './AlbumDetail';
 import { UserEndpoint, PhotoSetsEndpoint } from '../endpoints';
+import Title from './Title';
+import Loading from './Loading';
 
 const DEFAULT_USERNAME = 'maxipomar';
+const ALBUM_LIST_TITLE = 'Hola de nuevo'
 
-const AlbumList = () => {
+const AlbumList = ({navigation}) => {
     const [photoset, setPhotoset] = useState(null);
 
     useEffect(() => {
@@ -18,32 +20,31 @@ const AlbumList = () => {
         loadPhotoSet();
     }, [])
 
-
-    const renderAlbums = () => {
+    const renderAlbums = (item) => {
         if (photoset) {
-            return photoset.map(album =>
-                <AlbumDetail key={album.id} title={album.title._content} albumId={album.id} />
+            return(
+                <AlbumDetail navigation={navigation} key={item.id} title={item.title._content} albumId={item.id} />
             );
         }
     };
 
-
     if (!photoset) {
         return (
-            <Text>
-                Loading...
-            </Text>
+           <Loading></Loading>
         );
     }
 
     return (
         <View style={{ flex: 1 }}>
-            <ScrollView>
-                {renderAlbums()}
-            </ScrollView>
+            <Title>{`${ALBUM_LIST_TITLE} ${DEFAULT_USERNAME} !`}</Title>
+            <FlatList
+                data = {photoset}
+                showsVerticalScrollIndicator= {false}
+                renderItem={({item}) => (renderAlbums(item))}
+                keyExtractor={item => item.id}
+            />
         </View>
     );
 }
-
 
 export default AlbumList;

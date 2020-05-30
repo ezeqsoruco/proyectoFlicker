@@ -1,28 +1,33 @@
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity  } from 'react-native';
 
 const Card = (props) => {
   return (
-    <View style={styles.containerStyle}>
+    <TouchableOpacity onPress={props.onPress}  style={styles.containerStyle}>
       {props.children}
-    </View>
+    </TouchableOpacity >
   );
 };
 
 const styles = {
   containerStyle: {
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 10
+    borderRadius: 20,
+    backgroundColor: 'white',
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.20,
+    shadowRadius: 1.41,
+    
+    elevation: 2,
+
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 15,
+    marginBottom: 5
   }
 };
 

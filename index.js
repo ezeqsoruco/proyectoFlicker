@@ -7,21 +7,28 @@ import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
 import AlbumList from './src/components/AlbumList';
 import PhotoList from './src/components/PhotoList';
-import {Router, Scene, Stack} from 'react-native-router-flux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import CommentList from './src/components/CommentList';
 
-// Create a component
-const App = () => (
-  <Router>
-    <Stack key="root">
-      <Scene
-        key="albumList"
-        component={AlbumList}
-        title="Albums"
-        initial={true}
-      />
-      <Scene key="photoList" component={PhotoList} title="Photos" />
-    </Stack>
-  </Router>
-);
+const Stack = createStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Albums" component={AlbumList} option={{title: 'Albums'}}/>
+      <Stack.Screen name="Photos" component={PhotoList} option={{title: 'Photos'}} />
+      <Stack.Screen name="Comments" component={CommentList} option={{title: 'Comentarios'}} />
+    </Stack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
 
 AppRegistry.registerComponent(appName, () => App);

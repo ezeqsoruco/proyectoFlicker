@@ -3,29 +3,20 @@ import { Text, View, Image, Linking } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
-import { Actions } from 'react-native-router-flux';
+// import { Actions } from 'react-native-router-flux';
 
-const AlbumDetail = ({ title, albumId }) => {
+
+const AlbumDetail = ({ title, albumId, navigation }) => {
   const {
     headerContentStyle,
-    
     headerTextStyle,
     imageStyle
   } = styles;
   return (
-    <Card>
-      <CardSection>
+    <Card onPress={() => navigation.navigate('Photos',{albumId:albumId})}>
         <View style={headerContentStyle}>
           <Text style={headerTextStyle}>{title}</Text>
-          
         </View>
-      </CardSection>
-
-      <CardSection>
-        <Button onPress={() => Actions.photoList({albumId:albumId})}>
-          See Now!
-        </Button>
-      </CardSection>
     </Card>
   );
 };
@@ -33,10 +24,11 @@ const AlbumDetail = ({ title, albumId }) => {
 const styles = {
   headerContentStyle: {
     flexDirection: 'column',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between',
+    padding: 20, 
   },
   headerTextStyle: {
-    fontSize: 18
+    fontSize: 25,
   },
   thumbnailStyle: {
     height: 50,
