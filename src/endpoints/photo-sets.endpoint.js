@@ -13,6 +13,7 @@ const PHOTOSET_ID_PARAMETER = '&photoset_id='
 const EXTRAS_PARAMETER = '&extras='
 const PRIVACY_FILTER_PARAMETER = '&privacy_filter='
 const MEDIA_PARAMETER = '&media='
+const DATE_UPLOAD_EXTRA = '&extras=date_upload'
 
 export const getPhotoSets = async (userId, page, perPage, primaryPhotoExtras, photosIds, sortGroups) => {
     let parameters = ''
@@ -39,10 +40,13 @@ export const getPhotos = async (photosetId, userId, extras, perPage, page, priva
     if (page) parameters += PAGE_PARAMETER + page
     if (privacyFilter) parameters += PRIVACY_FILTER_PARAMETER + privacyFilter
     if (media) parameters += MEDIA_PARAMETER + media
+    parameters += DATE_UPLOAD_EXTRA
 
     return getData(GET_PHOTOS_ENDPOINT, parameters)
         .then(data => data.photoset.photo)
         .catch(error => console.log(error));
 }
+
+
 
 export default { getPhotoSets, getPhotos }
