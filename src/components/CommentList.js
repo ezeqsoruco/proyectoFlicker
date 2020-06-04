@@ -19,7 +19,9 @@ const CommentList = ({ route }) => {
     }, [])
 
     const renderComments = (comment) => {
-        <CommentDetail comment={comment}></CommentDetail>
+        console.log('comment')
+        console.log(comment)
+        return <CommentDetail comment={comment}></CommentDetail>
     }
 
     if (!comments) {
@@ -30,12 +32,14 @@ const CommentList = ({ route }) => {
     return (
         <View style={{ flex: 1 }}>
             <Thumbnail title={route.params.title} imageUrl={route.params.imageUrl} />
-            <FlatList
-                data={comments}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item }) => (renderComments(item))}
-                keyExtractor={item => item.comment}
-            />
+            <View style={{ paddingLeft: 15 }}>
+                <FlatList
+                    data={comments}
+                    showsVerticalScrollIndicator={false}
+                    renderItem={({ item }) => (renderComments(item))}
+                    keyExtractor={item => item.comment}
+                />
+            </View>
         </View>
     );
 }
