@@ -1,9 +1,9 @@
 import React from 'react';
-import { TouchableOpacity  } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 const Card = (props) => {
   return (
-    <TouchableOpacity onPress={props.onPress}  style={styles.containerStyle}>
+    <TouchableOpacity onPress={props.onPress} style={[styles.containerStyle, props.style]}>
       {props.children}
     </TouchableOpacity >
   );
@@ -21,7 +21,7 @@ const styles = {
     },
     shadowOpacity: 0.20,
     shadowRadius: 1.41,
-    
+
     elevation: 2,
 
     marginLeft: 15,

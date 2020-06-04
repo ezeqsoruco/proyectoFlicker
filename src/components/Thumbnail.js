@@ -2,9 +2,13 @@
 
 import React from 'react';
 import { Text, View, Image } from 'react-native';
-import CardSection from './CardSection';
+import Card from './Card';
 
 const styles = {
+  containerStyle: {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+  },
   headerContentStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around'
@@ -13,19 +17,21 @@ const styles = {
     fontSize: 18
   },
   thumbnailStyle: {
-    height: 50,
-    width: 50
+    height: 60,
+    width: 60,
+    borderTopLeftRadius:20,
+    borderBottomLeftRadius:20,
   },
   thumbnailContainerStyle: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    marginLeft: 10,
     marginRight: 10
   },
 };
 
 const Thumbnail = ({ title, imageUrl }) => {
   const {
+    containerStyle,
     thumbnailStyle,
     headerContentStyle,
     thumbnailContainerStyle,
@@ -33,17 +39,19 @@ const Thumbnail = ({ title, imageUrl }) => {
   } = styles;
 
   return (
-    <CardSection>
-      <View style={thumbnailContainerStyle}>
-        <Image
-          style={thumbnailStyle}
-          source={{ uri: imageUrl }}
-        />
+    <Card>
+      <View style={containerStyle}>
+        <View style={thumbnailContainerStyle}>
+          <Image
+            style={thumbnailStyle}
+            source={{ uri: imageUrl }}
+          />
+        </View>
+        <View style={headerContentStyle}>
+          <Text style={headerTextStyle}>{title}</Text>
+        </View>
       </View>
-      <View style={headerContentStyle}>
-        <Text style={headerTextStyle}>{title}</Text>
-      </View>
-    </CardSection>
+    </Card>
   )
 }
 
