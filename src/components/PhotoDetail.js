@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, Image, Linking } from 'react-native';
+import { View, Text, Image, Linking } from 'react-native';
 import Card from './Card';
 import Button from './Button';
-import { Actions } from 'react-native-router-flux';
+import Icon from './Icon';
+import { faComments } from '@fortawesome/free-solid-svg-icons'
 
 const PhotoDetail = ({ navigation, title, imageUrl, photoId }) => {
-  const { imageStyle, containerStyle, titleStyle } = styles;
+  const { imageStyle, containerStyle, titleStyle, captionStyle } = styles;
 
   return (
     <Card onPress={() => Linking.openURL(imageUrl)} style={containerStyle}>
@@ -13,15 +14,16 @@ const PhotoDetail = ({ navigation, title, imageUrl, photoId }) => {
         style={imageStyle}
         source={{ uri: imageUrl }}
       />
-      <Text style={titleStyle}>{title}</Text>
-      <Button onPress={() => navigation.navigate('Comments', { title, imageUrl, photoId })} ></Button>
+      <View style={captionStyle}>
+        <Text style={titleStyle}>{title}</Text>
+        <Icon onPress={() => navigation.navigate('Comments', { title, imageUrl, photoId })}  icon={faComments}></Icon>
+      </View>
     </Card>
   );
 };
 
 const styles = {
   titleStyle: {
-    padding: 20,
     fontSize: 16
   },
   containerStyle: {
@@ -33,6 +35,13 @@ const styles = {
     height: 300,
     flex: 1,
     width: null
+  },
+  captionStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 20
   }
 };
 
