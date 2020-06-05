@@ -77,18 +77,16 @@ const PhotoList = (props) => {
   return (
     
     <View style={{ flex: 1 }}>
-      <View>
+      <View style={{height: 57, backgroundColor: "#DFDEDE"}}>
+        <Text style={{...styleText }}>Ordenar por: </Text>
         <RNPickerSelect
-            placeholder={{
-              label: 'Ordenar por...',
-              value: null,
-            }}
+            style={{ ...pickerSelectStyles }}
+            placeholder={{}}
             onValueChange={(value) => changeTypeOrder(value)}
             items={[
                 { label: 'Fecha', value: 'date' },
                 { label: 'Nombre', value: 'name' },
             ]}
-            style={{ ...pickerSelectStyles }}
         />
       </View>
       <FlatList
@@ -102,17 +100,28 @@ const PhotoList = (props) => {
 }
 
 const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-      fontSize: 16,
-      paddingTop: 13,
-      paddingHorizontal: 10,
-      paddingBottom: 12,
-      borderWidth: 1,
-      borderColor: 'gray',
-      borderRadius: 4,
-      backgroundColor: 'white',
-      color: 'red',
+  inputAndroid:{
+    textAlign: 'center',
+    padding: 25,
+    left: 20,
+    bottom: 5,
+    left: 5
   },
+  viewContainer: {
+    backgroundColor: '#FFFFFF',
+    width: 200,
+    left: 190,
+    borderRadius: 20,
+    bottom: 15,
+    height: 40,
+    elevation: 3
+  }
 });
+
+const styleText = StyleSheet.create({
+  fontSize: 16,
+  top: 15,
+  left: 25
+})
 
 export default PhotoList;
