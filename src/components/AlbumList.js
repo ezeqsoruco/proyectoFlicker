@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, Text, View, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import AlbumDetail from './AlbumDetail';
 import { UserEndpoint, PhotoSetsEndpoint } from '../endpoints';
 import Title from './Title';
 import Loading from './Loading';
 
-const DEFAULT_USERNAME = 'maxipomar';
 const ALBUM_LIST_TITLE = 'Hola de nuevo'
 
 const AlbumList = ({navigation}) => {
     const [photoset, setPhotoset] = useState(null);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         async function loadPhotoSet() {
-            const user = await UserEndpoint.getUserByUserName(DEFAULT_USERNAME);
-            const photosetFromFlickr = await PhotoSetsEndpoint.getPhotoSets(user.id);
+            const userFromFLckr = await UserEndpoint.getUser();
+            console.log(userFromFLckr)
+            setUser(userFromFLckr)
+            const photosetFromFlickr = await PhotoSetsEndpoint.getPhotoSets(userFromFLckr.id);
             setPhotoset(photosetFromFlickr.photoset);
         }
         loadPhotoSet();
@@ -28,7 +30,7 @@ const AlbumList = ({navigation}) => {
         }
     };
 
-    if (!photoset) {
+    if (!photoset && !user) {
         return (
            <Loading></Loading>
         );
@@ -36,7 +38,7 @@ const AlbumList = ({navigation}) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <Title>{`${ALBUM_LIST_TITLE} ${DEFAULT_USERNAME} !`}</Title>
+            <Title>{`${ALBUM_LIST_TITLE} ${user.username._content} !`}</Title>
             <FlatList
                 data = {photoset}
                 showsVerticalScrollIndicator= {false}

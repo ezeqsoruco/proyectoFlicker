@@ -7,14 +7,13 @@ import { FlatList } from 'react-native-gesture-handler';
 import RNPickerSelect from 'react-native-picker-select';
 
 var typeOrder = '';
-const DEFAULT_USERNAME = 'maxipomar';
 
 const PhotoList = (props) => {
   const [photos, setPhotos] = useState(null);
 
   useEffect(() => {
     async function loadPhotoSets() {
-      const user = await UserEndpoint.getUserByUserName(DEFAULT_USERNAME);
+      const user = await UserEndpoint.getUser();
       const photosFromFLickr = await PhotoSetsEndpoint.getPhotos(props.route.params.albumId, user.id);
       setPhotos(photosFromFLickr);
     }
