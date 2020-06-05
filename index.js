@@ -7,10 +7,17 @@ import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
 import AlbumList from './src/components/AlbumList';
 import PhotoList from './src/components/PhotoList';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import CommentList from './src/components/CommentList';
 
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#DFDEDE',
+  },
+};
 const Stack = createStackNavigator();
 
 function MyStack() {
@@ -25,7 +32,7 @@ function MyStack() {
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={MyTheme}>
       <MyStack />
     </NavigationContainer>
   );
