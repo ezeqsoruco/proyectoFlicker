@@ -39,15 +39,6 @@ const AlbumList = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <View style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'flex-end'
-            }}>
-                <Icon onPress={() => navigation.navigate('Configuration')}
-                    icon={faCog}
-                    style={{ marginRight: 10, marginTop: 10 }}></Icon>
-            </View>
             <Title>{`${ALBUM_LIST_TITLE} ${user.username._content} !`}</Title>
             <FlatList
                 data={photoset}

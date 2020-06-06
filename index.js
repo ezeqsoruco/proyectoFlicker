@@ -27,7 +27,6 @@ function MyStack() {
       <Stack.Screen name="Albums" component={AlbumList} option={{ title: 'Albums' }} />
       <Stack.Screen name="Photos" component={PhotoList} option={{ title: 'Photos' }} />
       <Stack.Screen name="Comments" component={CommentList} option={{ title: 'Comentarios' }} />
-      <Stack.Screen name="Configuration" component={Configuration} option={{ title: 'Configuración' }} />
     </Stack.Navigator>
   );
 }
