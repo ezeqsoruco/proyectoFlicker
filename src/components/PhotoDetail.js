@@ -15,8 +15,8 @@ const PhotoDetail = ({ navigation, title, imageUrl, photoId }) => {
         source={{ uri: imageUrl }}
       />
       <View style={captionStyle}>
-        <Text style={titleStyle}>{title}</Text>
-        <Icon onPress={() => navigation.navigate('Comments', { title, imageUrl, photoId })}  icon={faComments}></Icon>
+        <Text style={titleStyle} numberOfLines={2} ellipsizeMode="tail">{title}</Text>
+        <Icon onPress={() => navigation.navigate('Comments', { title, imageUrl, photoId })} icon={faComments}></Icon>
       </View>
     </Card>
   );
@@ -24,7 +24,11 @@ const PhotoDetail = ({ navigation, title, imageUrl, photoId }) => {
 
 const styles = {
   titleStyle: {
-    fontSize: 16
+    fontSize: 16,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'elipsis',
+    maxWidth: 220
   },
   containerStyle: {
     marginRight: 20,

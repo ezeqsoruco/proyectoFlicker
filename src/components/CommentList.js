@@ -11,16 +11,12 @@ const CommentList = ({ route }) => {
     useEffect(() => {
         async function loadComments() {
             const comments = await CommentsEndpoint.getComments(route.params.photoId);
-            console.log('comments');
-            console.log(comments);
             setComments(comments);
         }
         loadComments();
     }, [])
 
     const renderComments = (comment) => {
-        console.log('comment')
-        console.log(comment)
         return <CommentDetail comment={comment}></CommentDetail>
     }
 

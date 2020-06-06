@@ -6,15 +6,14 @@ import Loading from './Loading';
 import { FlatList } from 'react-native-gesture-handler';
 import RNPickerSelect from 'react-native-picker-select';
 
-var typeOrder = "";
-const DEFAULT_USERNAME = 'maxipomar';
+var typeOrder = '';
 
 const PhotoList = (props) => {
   const [photos, setPhotos] = useState(null);
 
   useEffect(() => {
     async function loadPhotoSets() {
-      const user = await UserEndpoint.getUserByUserName(DEFAULT_USERNAME);
+      const user = await UserEndpoint.getUser();
       const photosFromFLickr = await PhotoSetsEndpoint.getPhotos(props.route.params.albumId, user.id);
       setPhotos(photosFromFLickr);
     }
@@ -63,12 +62,12 @@ const PhotoList = (props) => {
       typeOrder = type;
       console.log(typeOrder);
 
-      if(typeOrder === "name")
+      if(typeOrder === 'name')
       {
         sortItemByName();
       } 
 
-      if(typeOrder === "date")
+      if(typeOrder === 'date')
       {
         sortItemByDate();
       }
@@ -76,8 +75,8 @@ const PhotoList = (props) => {
 
   return (
     
-    <View style={{ flex: 1 }}>
-      <View style={{height: 57, backgroundColor: "#DFDEDE"}}>
+    <View style={{ flex: 1,  marginTop:4}}>
+      <View style={{height: 57, backgroundColor: 'transparent'}}>
         <Text style={{...styleText }}>Ordenar por: </Text>
         <RNPickerSelect
             style={{ ...pickerSelectStyles }}
